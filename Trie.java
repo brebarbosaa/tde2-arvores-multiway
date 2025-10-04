@@ -54,4 +54,28 @@ public class Trie {
 
         return false;
     }
+        public void remover(String palavra) {
+        ArvoreTrie atual = raiz;
+        int i = 0;
+
+        // Percorre a Trie até o nó final da palavra
+        while (i < palavra.length()) {
+            char c = palavra.charAt(i);
+            int indice = c - 'a';
+
+            // Se o caminho não existe, a palavra não está lá
+            if (atual.filhos[indice] == null) {
+                return;
+            }
+
+            atual = atual.filhos[indice];
+            i = i + 1;
+        }
+
+        // Desmarca o fim da palavra no nó final.
+        // Se a palavra foi encontrada, atual.fimDaString será true.
+        if (atual.fimDaString == true) {
+            atual.fimDaString = false;
+        }
+    }
 }
