@@ -54,61 +54,28 @@ public class Trie {
 
         return false;
     }
-    // -------------------------------------
-    // REMOÇÃO RECURSIVA OTIMIZADA
-    // -------------------------------------
-
-    public void remover(String palavra) {
-        // A busca é essencial para garantir que a palavra existe antes de iniciar a recursão
-        if (busca(palavra)) {
-            removerAuxiliar(raiz, palavra, 0);
-        }
-    }
-
-    // Verifica manualmente se há algum nó filho não nulo
-    private boolean temFilhos(ArvoreTrie no) {
+        public void remover(String palavra) {
+        ArvoreTrie atual = raiz;
         int i = 0;
-        while (i < 26) {
-            if (no.filhos[i] != null) {
-                return true;
+
+        // Percorre a Trie até o nó final da palavra
+        while (i < palavra.length()) {
+            char c = palavra.charAt(i);
+            int indice = c - 'a';
+
+            // Se o caminho não existe, a palavra não está lá
+            if (atual.filhos[indice] == null) {
+                return;
             }
+
+            atual = atual.filhos[indice];
             i = i + 1;
         }
-        return false;
-    }
 
-    private ArvoreTrie removerAuxiliar(ArvoreTrie noAtual, String palavra, int indice) {
-        if (indice == palavra.length()) {
-            noAtual.fimDaString = false;
-
-            // Se o nó final não tem filhos, ele pode ser apagado
-            if (this.temFilhos(noAtual) == false) {
-                return null
-            }
-            return noAtual;
+        // Desmarca o fim da palavra no nó final.
+        // Se a palavra foi encontrada, atual.fimDaString será true.
+        if (atual.fimDaString == true) {
+            atual.fimDaString = false;
         }
-
-    
-        char c = palavra.charAt(indice);
-        int i = c - 'a';
-
-        if (noAtual.filhos[i] == null) {
-            return noAtual;
-        }
-
-        // Chamada recursiva para o próximo nível
-        ArvoreTrie filhoAposRemocao = removerAuxiliar(noAtual.filhos[i], palavra, indice + 1);
-        
-        // Backtracking: Atribui o resultado da remoção
-        noAtual.filhos[i] = filhoAposRemocao; 
-
-        // Verifica se o nó atual pode ser apagado
-        if (noAtual.fimDaString == false && this.temFilhos(noAtual) == false) {
-            if (noAtual != raiz) {
-                return null; // Sinaliza que este nó deve ser removido
-            }
-        }
-        
-        return noAtual; 
     }
 }
