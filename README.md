@@ -16,3 +16,13 @@ A Trie é uma estrutura de dados eficiente para armazenar e buscar palavras, mui
 
 ---
 
+## Como Executar
+No terminal ou prompt de comando:
+
+javac Main.java Trie.java
+java Main
+
+---
+
+## Desenvolvido por:
+Alana Queiroz, Brenda Barbosa e Leticia Vieira
