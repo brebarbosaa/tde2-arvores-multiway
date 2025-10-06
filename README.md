@@ -20,6 +20,7 @@ A Trie é uma estrutura de dados eficiente para armazenar e buscar palavras, mui
 No terminal ou prompt de comando:
 
 javac Main.java Trie.java
+
 java Main
 
 ---
